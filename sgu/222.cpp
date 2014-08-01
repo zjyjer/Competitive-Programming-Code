@@ -15,7 +15,7 @@ int main()
 		f[i]=i*f[i-1];
 	int n,k;
 	scanf("%d %d",&n,&k);
-	if(k>n || k==0)
+	if(k>n)
 	{
 		printf("0");
 		return 0;
