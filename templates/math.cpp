@@ -12,7 +12,8 @@ int inv[maxn];
 int prime[maxn];
 int phi[maxn];
 int mu[maxn];
-
+int check[maxn];
+int tot;
 int fastpow(int a,int n) //a^n mod p
 {
 	long long ret=a;
@@ -27,17 +28,33 @@ int fastpow(int a,int n) //a^n mod p
 	return ret;
 }
 
-int xx,yy;
-int exgcd(int a,int b,int &x,int &y) //a*x+b*y=(a,b)
+long long xx,yy;
+long long exgcd(long long a, long long b, long long &x, long long &y) //a*x+b*y=(a,b)
 {
 	if(b==0)
 	{
-		x=1,y=0;
+		x=1, y=0;
 		return a;
 	}
-	int d=exgcd(b,a%b,y,x);
-	y-=x*(a/b);
+	long long d=exgcd(b, a%b, y, x);
+	y-=x * (a/b);
 	return d;
+}
+
+void primetable(int n)
+{
+	memset(check, 1, sizeof(check));
+	tot = 0;
+	for(int i = 2;i <= n; i++) {
+	//	printf("%d\n",i);
+		if (check[i])
+			prime[++tot] = i;
+		for(int j = 1; ((j <= tot) && (i * prime[j] <= n)); j++)
+		{
+			check[i * prime[j]] = false;
+			if (i % prime[j] == 0) break;
+		}
+	}
 }
 
 int getphi(int n)
@@ -83,7 +100,28 @@ void phitable(int n)
 		}
 	}
 }
-
+void miutable(int n)
+{
+	memset(check, 0, sizeof(check));
+	mu[1] = 1;
+	int tot = 0;
+	for(int i = 2; i < n; i++) {
+		if(!check[i]){
+			prime[tot ++] = i;
+			mu[i] = -1;
+		}
+		for(int j = 0; j < tot; j++) {
+			if(i * prime[j] > maxn) break;
+			check[i * prime[j]] = 1;
+			if(i % prime[j] == 0){
+				mu[i * prime[j]] = 0;
+				break;
+			} else {
+				mu[i * prime[j]] = -mu[i];
+			}
+		}
+	}
+}
 void invtable(int n)
 {
 	memset(inv,0,sizeof(inv));
@@ -111,4 +149,13 @@ vector <long long> line_mod_equation(long long a,long long b,long long n)
 			ans.push_back((ans[0]+i*n/d)%n);
 	}
 	return ans;
+}
+
+int main()
+{
+	phitable(10000);
+	long long ans = 0;
+	for(int i = 9900; i <= 10000; i++)
+		cout << getphi(i) << endl;
+	return 0;
 }
