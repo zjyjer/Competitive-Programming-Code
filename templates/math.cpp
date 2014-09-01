@@ -6,7 +6,7 @@
 #include <algorithm>
 using namespace std;
 
-const int mod=1e9+7;
+int mod;
 const int maxn=1e6+7;
 int inv[maxn];
 int prime[maxn];
@@ -16,13 +16,13 @@ int check[maxn];
 int tot;
 int fastpow(int a,int n) //a^n mod p
 {
-	long long ret=a;
+	long long ret=1;
 	int tmp=a;
 	while(n)
 	{
 		if(n&1)
 			ret=ret*tmp%mod;
-		tmp=tmp*tmp%mod;
+		tmp=(long long)tmp*tmp%mod;
 		n>>=1;
 	}
 	return ret;
@@ -57,7 +57,7 @@ void primetable(int n)
 	}
 }
 
-int getphi(int n)
+int getphi(long long n)
 {
 	int m=sqrt(n+0.5);
 	int ans=n;
@@ -153,9 +153,28 @@ vector <long long> line_mod_equation(long long a,long long b,long long n)
 
 int main()
 {
-	phitable(10000);
-	long long ans = 0;
-	for(int i = 9900; i <= 10000; i++)
-		cout << getphi(i) << endl;
+	//p = 10000;
+	int cas;
+	scanf("%d",&cas);
+	while(cas--)
+	{
+		int b;	
+		scanf("%d %d",&b, &mod);
+		b = b % mod;
+		int k = b;	
+		int ans = mod;	
+		int a = getphi((long long)mod);
+		for(int i = 1; i <=sqrt(a+0.5); i++)
+		{
+			if(a%i==0)
+			{
+				if(fastpow(b,i)==1)
+					ans = min(ans,i);
+				if(fastpow(b,a/i)==1)
+					ans = min(ans, a/i);
+			}
+		}
+		printf("%lld\n",(long long)ans*6 + 3);
+	}	
 	return 0;
 }
