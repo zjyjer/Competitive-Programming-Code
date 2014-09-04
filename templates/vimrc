@@ -1,0 +1,24 @@
+set nu
+set nocp
+set ru
+set sm
+set sw=4
+set ts=4
+set smarttab
+set encoding=utf-8
+set cin
+set smartindent
+set hlsearch
+set incsearch
+syntax on
+set backspace=indent,eol,start
+colorscheme ron
+filetype plugin indent on
+nmap <F2> :vs %:r.in<CR>
+autocmd filetype cpp nmap <F5> :!time ./%:r<%:r.in<CR>
+autocmd filetype cpp nmap <F8> :!make %:r <CR>
+autocmd filetype cpp nmap <F9> :!./%:r<CR>
+
+autocmd filetype java nmap <F5> :!time !java %:r <%:r.in <CR>
+autocmd filetype java nmap <F8> :!javac %:r.java <CR>
+autocmd filetype java nmap <F9> :!java %:r
