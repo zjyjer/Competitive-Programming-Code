@@ -21,7 +21,7 @@ void build(int l, int r, int &cur)
 	build(mid + 1, r, node[cur].r);
 }
 
-void update(int o, int p, int v, int l, int r, int &cur)
+void update(int o, int k, int v, int l, int r, int &cur)
 {
 	cur = ++tot;
 	node[cur].sum = node[o].sum + v;
@@ -30,9 +30,9 @@ void update(int o, int p, int v, int l, int r, int &cur)
 	if(l == r)
 		return;
 	int mid = (l + r) >> 1;
-	if(p <= mid)
-		update(node[o].l, p, v, l, mid, node[cur].l);
-	else update(node[o].r, p, v, mid + 1, r, node[cur].r);
+	if(k <= mid)
+		update(node[o].l, k, v, l, mid, node[cur].l);
+	else update(node[o].r, k, v, mid + 1, r, node[cur].r);
 }	
 
 int query(int o, int k, int l, int r, int cur)
