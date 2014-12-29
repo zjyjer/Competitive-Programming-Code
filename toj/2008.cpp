@@ -33,9 +33,6 @@ std::vector<point> V;
 
 int main() {
 	int cas = 1, n;
-	int a, b;
-	while (std::cin >> a >> b)
-		std::cout << std::__gcd(a, b) << std::endl;
 	while (scanf("%d", &n) && n) {
 		int ans = 0;
 		for (int i = 1; i <= n; i++)
