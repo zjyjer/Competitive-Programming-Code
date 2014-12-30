@@ -89,8 +89,8 @@ void phitable(int n)
 		}
 		for(int j=0;j<tot;j++)
 		{
-			if(i*phi[i]>n) break;
-			check[i*phi[i]]=1;
+			if(i * prime[j]>n) break;
+			check[i* prime[j]]=1;
 			if(i%prime[j]==0)
 			{
 				phi[i*prime[j]]=phi[i]*prime[j];
