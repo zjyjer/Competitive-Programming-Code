@@ -3,7 +3,7 @@
 
 int main(){
 	int cas = 0, p;
-	freopen("467.in", "r", stdin);
+	//freopen("467.in", "r", stdin);
 	while(std::cin>>p) {
 		printf("Case #%d: ", ++cas);
 		if (p == 0)

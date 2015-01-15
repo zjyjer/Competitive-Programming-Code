@@ -1,72 +1,51 @@
 #include <iostream>
+#include <cstdio>
 #include <cstring>
 #include <algorithm>
-using namespace std;
 
-int n;
-struct Node
+int a[66000], b[66000], bit[66000];
+int n, tmp;
+int lowbit(int s)
 {
-	long long val;
-	int id;
-}node[70000];
-
-long long bit[70000],t[70000];
-
-int lowbit(int n)
-{
-	return n&(-n);
+    return s & (-s);
 }
-
-void add(int a,int k)
+void add(int a, int x)
 {
-	while(a<=n)
-	{
-		bit[a]+=k;
-		a+=lowbit(a);
-	}
+    while (a <= n)
+    {
+        bit[a] += x;
+        a += lowbit(a);
+    }
 }
-
 long long sum(int a)
 {
-	long long ret=0;
-	while(a>0)
-	{
-		ret+=bit[a];
-		a-=lowbit(a);
-	}
-	return ret;
+    long long ans = 0;
+    while (a > 0)
+    {
+        ans += bit[a];
+        a -= lowbit(a);
+    }
+    return ans;
 }
-
-bool cmp(Node a,Node b)
-{
-	if(a.val!=b.val)
-		return a.val<b.val;
-	else return a.id<b.id;
-}
-
 int main()
 {
-	cin >> n;
-	for(int i=1;i<=n;i++)
-	{
-		cin >> node[i].val;
-		node[i].id=i;
-	}
-	sort(node+1,node+n+1,cmp);
-	int jj=0;
-	node[0].val=-11000;
-	for(int i=1;i<=n;i++)
-	{
-		if(node[i].val!=node[i-1].val)
-			jj++;
-		t[node[i].id]=jj;
-	}
-	long long ans=0;
-	for(int i=1;i<=n;i++)
-	{
-		add(t[i],1);
-		ans+=i-sum(t[i]);
-	}
-	cout << ans << endl;
-	return 0;
+    //freopen("inverse.in", "r", stdin);
+    std::cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        std::cin >> a[i];
+        b[i] = a[i];
+    }
+    std::sort(a, a + n);
+    int size = std::unique(a, a + n) - a;
+    for (int i = 0; i < n; i++)
+        b[i] = std::lower_bound(a, a + size, b[i]) - a + 1;
+    long long ans = 0;
+    memset(bit, 0, sizeof(bit));
+    for (int i = 0; i < n; i++)
+    {
+        add(b[i], 1);
+        ans += i + 1 - sum(b[i]);
+    }
+    std::cout << ans << std::endl;
 }
