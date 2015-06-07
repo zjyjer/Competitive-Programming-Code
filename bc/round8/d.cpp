@@ -85,12 +85,6 @@ int check(int x)
 
 int ans[maxn];
 
-int gcd(int x, int y)
-{
-	if(x==0)
-		return y;
-	else return gcd(y%x, x);
-}
 int main()
 {
 	init();
@@ -139,7 +133,7 @@ int main()
 		{
 			if(phi2 == step-1) break;
 			pp = (long long)pp * g % n;
-			if(gcd(i, phi)!=1) continue;
+			if(__gcd(i, phi)!=1) continue;
 			ans[step++] = pp;
 		}
 		sort(ans, ans+step);

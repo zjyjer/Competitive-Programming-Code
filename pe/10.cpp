@@ -3,7 +3,7 @@
 #include <cstring>
 using namespace std;
 
-const int maxn = 1000010;
+const int maxn = 2000010;
 bool vis[maxn];
 int prime[maxn];
 int cur = 0;
@@ -24,13 +24,13 @@ void init()
 
 int main()
 {
-	int t;
-	cin >> t;
+	//int t;
+	//cin >> t;
 	init();
-	while(t--)
-	{
-		int n;
-		cin >> n;
+	//while(t--)
+	//{
+		int n = 2000000;
+		//cin >> n;
 		long long ans = 0;
 		for(int i = 1; i <cur; i++)
 		{
@@ -39,6 +39,6 @@ int main()
 			else break;
 		}
 		cout << ans << endl;
-	}
+	//}
 	return 0;
 }
