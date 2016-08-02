@@ -1,5 +1,5 @@
 # Volume 1
-## current : 7
+## current : 12
 ~~100	 A+B	19368~~
 
 ~~102	 Coprimes	7974~~
@@ -12,13 +12,13 @@
 
 ~~135	 Drawing Lines	4288~~
 
-107	 987654321 problem	4148
+~~107	 987654321 problem	4148~~
 
 ~~184	 Patties	4116~~
 
-113	 Nearly prime numbers	3949
+~~113	 Nearly prime numbers	3949~~
 
-112	 a^b - b^a	3813
+~~112	 a^b - b^a	3813~~
 
 101	 Domino	3790
 
@@ -28,7 +28,7 @@
 
 127	 Telephone directory	3370
 
-118	 Digital root	2947
+~~118	 Digital root	2947~~
 
 126	 Boxes	2914
 
@@ -54,7 +54,7 @@
 
 106	 The Equation	1969
 
-111	 Very simple problem	1958
+~~111	 Very simple problem	1958~~
 
 181	 X-Sequence	1872
 

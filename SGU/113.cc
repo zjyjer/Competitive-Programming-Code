@@ -1,52 +1,54 @@
-#include <cstdio>
-#include <cstring>
-const int maxn = 10000;
-const int maxm = 100010;
-int prime[maxn];
-bool vis[maxm + 10];
-int cur = 0;
-void pritable() {
-  memset(vis, 0, sizeof(vis));
-  for (long long i = 2; i <= maxm; i++) {
+#include <iostream>
+#include <cmath>
+#include <cstdlib>
+
+const int MAXP = 35000;
+bool vis[MAXP] = {0};
+int cnt = 0;
+int prime[MAXP];
+
+void init() {
+  for (int i = 2; i < MAXP; i++) {
     if (!vis[i]) {
-      vis[i] = 1;
-      prime[cur++] = i;
-      for (long long j = i * i; j <= maxm; j += i)
+      prime[cnt++] = i;
+      for (int j = i * i; j < MAXP; j += i) {
         vis[j] = 1;
+      }
     }
   }
 }
 
-bool is_prime(int n) {
-  for (int i = 0; i < cur && prime[i] < n; i++)
-    if (n % prime[i] == 0)
-      return false;
-  return true;
-}
-void solve(int m) {
-  bool flag = 0;
-  for (int i = 0; i < cur && prime[i] < m; i++) {
-    if (m % prime[i] == 0) {
-      int n = m / prime[i];
-      if (is_prime(n)) {
-        flag = 1;
+int main() {
+  init();
+  int T;
+  std::cin >> T;
+  while (T--) {
+    int n;
+    std::cin >> n;
+    int m = sqrt(1 + n);
+    int step = 0;
+    while (prime[step] <= m) {
+      if (n % prime[step] == 0) {
+        n /= prime[step];
         break;
       }
+      step++;
     }
-  }
-  if (flag)
-    puts("Yes");
-  else
-    puts("No");
-}
-int main() {
-  int n;
-  scanf("%d", &n);
-  int m;
-  pritable();
-  for (int i = 0; i < n; i++) {
-    scanf("%d", &m);
-    solve(m);
+    if (prime[step] > m) {
+      std::cout << "No\n";
+      continue;
+    }
+    m = sqrt(1 + n);
+    bool flag = true;
+    step = 0;
+    while (prime[step] <= m) {
+      if (n % prime[step] == 0) {
+        flag = false;
+        break;
+      }
+      step++;
+    }
+    std::cout << (flag ? "Yes\n" : "No\n");
   }
   return 0;
 }
